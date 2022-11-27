@@ -1,5 +1,6 @@
 import requests
 from pytube import YouTube as yt
+import os
 
 class GetAllLinks:
     """
@@ -29,6 +30,8 @@ class DownloadVideos:
         """
         yt_video=yt(url=url)
         print(f"Downloading videos --> {yt_video.title} count --> {count}")
-        yt(url=url).streams.get_highest_resolution().download()
+        home_directory= os.path.expanduser( '~' )
+        downloads_path= os.path.join(home_directory,"Downloads")
+        yt(url=url).streams.get_highest_resolution().download(output_path=downloads_path)
         print(f"video downloaded --> {yt_video.title}")
 
